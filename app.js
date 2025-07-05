@@ -38,4 +38,10 @@ async function fetchExpenses() {
   ul.appendChild(li);
 });
 
+const poolData = {
+  UserPoolId: 'us-east-1_AmVAfOyNM',
+  ClientId: '6uetlptr2vqff5dif1ncoh7v5'
+};
+const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
 }
