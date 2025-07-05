@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6 font-sans">
+  <div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold mb-4 text-blue-700">Expense Filter</h1>
+    
+    <div class="space-y-4">
+      <input type="text" id="userId" placeholder="User ID" class="w-full p-2 border rounded" />
+      <div class="flex gap-2">
+        <label for="start" class="text-sm text-gray-600 mb-1">Start Date</label>
+        
+        <input type="date" id="start" class="flex-1 p-2 border rounded" />
+        
+        <label for="end" class="text-sm text-gray-600 mb-1">End Date</label>
+        <input type="date" id="end" class="flex-1 p-2 border rounded" />
+  
+
+      </div>
+      <select id="category" class="w-full p-2 border rounded">
+        <option value="">All Categories</option>
+        <option value="food">Food</option>
+        <option value="Transport">Transport</option>
+        <option value="Shopping">Shopping</option>
+      </select>
+      <button onclick="fetchExpenses()" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
+        Get Expenses
+      </button>
+    </div>
+
+    <div id="loader" class="mt-4 text-blue-600 font-medium hidden">Loading...</div>
+    
+    <div id="summary" class="mt-4 text-gray-700 font-semibold"></div>
+
+    <ul id="results" class="mt-4 space-y-2"></ul>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
