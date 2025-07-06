@@ -1,6 +1,38 @@
+// 🔐 Cognito setup
+const poolData = {
+  UserPoolId: 'us-east-1_AmVAfOyNM',
+  ClientId: '6uetlptr2vqff5dif1ncoh7v5'
+};
+const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
+// 🧠 Login button logic
+document.getElementById("loginBtn").addEventListener("click", () => {
+  const username = document.getElementById("emailInput").value;
+  const password = document.getElementById("passwordInput").value;
+
+  const authDetails = new AmazonCognitoIdentity.AuthenticationDetails({ Username: username, Password: password });
+  const userData = { Username: username, Pool: userPool };
+  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+  cognitoUser.authenticateUser(authDetails, {
+    onSuccess: (result) => {
+      const idToken = result.getIdToken().getJwtToken();
+      console.log("Login successful! JWT:", idToken);
+
+      // 💡 Save token globally or in localStorage
+      window.userToken = idToken;
+
+      // (Optional) Call fetchExpenses here if you want to auto-load after login
+    },
+    onFailure: (err) => {
+      console.error("Login failed:", err.message || JSON.stringify(err));
+      alert("Login error: " + err.message);
+    }
+  });
+});
+
+// 📦 Expense fetching function
 async function fetchExpenses() {
-    console.log("Button clicked");
   const userId = document.getElementById('userId').value;
   const start = document.getElementById('start').value;
   const end = document.getElementById('end').value;
@@ -11,37 +43,14 @@ async function fetchExpenses() {
   if (end) params.append('end', end + 'T23:59');
   if (category) params.append('category', category);
 
- const apiUrl = "https://ylgl5p7917.execute-api.us-east-1.amazonaws.com/prod";
- const res = await fetch(`${apiUrl}/expenses?${params.toString()}`);
-  
-  const data = await res.json();
+  const apiUrl = "https://ylgl5p7917.execute-api.us-east-1.amazonaws.com/prod";
 
-  document.getElementById('summary').textContent =
-    `Total: ${data.totalAmount} | Count: ${data.count}`;
-
-  const ul = document.getElementById('results');
-  ul.innerHTML = "";
-  data.data.forEach(item => {
-  const li = document.createElement('li');
-
-  // Format timestamp
-  const formattedDate = new Date(item.timestamp).toLocaleString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
+  const res = await fetch(`${apiUrl}/expenses?${params.toString()}`, {
+    headers: {
+      Authorization: window.userToken // ⬅️ token from login
+    }
   });
 
-  li.textContent = `${formattedDate} – ${item.category} – $${item.amount}`;
-  li.className = "border p-2 rounded bg-gray-50"; // optional styling
-  ul.appendChild(li);
-});
-
-const poolData = {
-  UserPoolId: 'us-east-1_AmVAfOyNM',
-  ClientId: '6uetlptr2vqff5dif1ncoh7v5'
-};
-const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-
+  const data = await res.json();
+  // 📊 Render summary + results...
 }
