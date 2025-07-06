@@ -1,22 +1,32 @@
-
-import { CognitoUserPool } from 'amazon-cognito-identity-js';
-
+import {
+  CognitoUserPool,
+  AuthenticationDetails,
+  CognitoUser
+} from "https://esm.sh/amazon-cognito-identity-js";
 
 // 🔐 Cognito setup
 const poolData = {
   UserPoolId: 'us-east-1_AmVAfOyNM',
   ClientId: '6uetlptr2vqff5dif1ncoh7v5'
 };
-const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+const userPool = new CognitoUserPool(poolData);
 
 // 🧠 Login button logic
 document.getElementById("loginBtn").addEventListener("click", () => {
   const username = document.getElementById("emailInput").value;
   const password = document.getElementById("passwordInput").value;
 
-  const authDetails = new AmazonCognitoIdentity.AuthenticationDetails({ Username: username, Password: password });
-  const userData = { Username: username, Pool: userPool };
-  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+  const authDetails = new AuthenticationDetails({
+    Username: username,
+    Password: password
+  });
+
+  const userData = {
+    Username: username,
+    Pool: userPool
+  };
+
+  const cognitoUser = new CognitoUser(userData);
 
   cognitoUser.authenticateUser(authDetails, {
     onSuccess: (result) => {
@@ -26,7 +36,8 @@ document.getElementById("loginBtn").addEventListener("click", () => {
       // 💡 Save token globally or in localStorage
       window.userToken = idToken;
 
-      // (Optional) Call fetchExpenses here if you want to auto-load after login
+      // Optionally auto-fetch expenses after login
+      // fetchExpenses();
     },
     onFailure: (err) => {
       console.error("Login failed:", err.message || JSON.stringify(err));
@@ -56,5 +67,6 @@ async function fetchExpenses() {
   });
 
   const data = await res.json();
-  // 📊 Render summary + results...
+  console.log("Fetched expenses:", data);
+  // 📊 Add code here to display results to the user
 }
