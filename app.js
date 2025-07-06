@@ -28,22 +28,36 @@ document.getElementById("loginBtn").addEventListener("click", () => {
 
   const cognitoUser = new CognitoUser(userData);
 
-  cognitoUser.authenticateUser(authDetails, {
-    onSuccess: (result) => {
-      const idToken = result.getIdToken().getJwtToken();
-      console.log("Login successful! JWT:", idToken);
+cognitoUser.authenticateUser(authDetails, {
+  onSuccess: (result) => {
+    const idToken = result.getIdToken().getJwtToken();
+    console.log("Login successful! JWT:", idToken);
+    window.userToken = idToken;
+    // fetchExpenses();
+  },
+  onFailure: (err) => {
+    console.error("Login failed:", err.message || JSON.stringify(err));
+    alert("Login error: " + err.message);
+  },
+  newPasswordRequired: (userAttributes, requiredAttributes) => {
+    // You can prompt user for new password here
+    const newPassword = prompt("New password required. Please enter a new one:");
 
-      // 💡 Save token globally or in localStorage
-      window.userToken = idToken;
+    cognitoUser.completeNewPasswordChallenge(newPassword, {}, {
+      onSuccess: (result) => {
+        const idToken = result.getIdToken().getJwtToken();
+        console.log("Password updated. New JWT:", idToken);
+        window.userToken = idToken;
+        // fetchExpenses();
+      },
+      onFailure: (err) => {
+        console.error("Password update failed:", err.message || JSON.stringify(err));
+        alert("Password update error: " + err.message);
+      }
+    });
+  }
+});
 
-      // Optionally auto-fetch expenses after login
-      // fetchExpenses();
-    },
-    onFailure: (err) => {
-      console.error("Login failed:", err.message || JSON.stringify(err));
-      alert("Login error: " + err.message);
-    }
-  });
 });
 
 // 📦 Expense fetching function
