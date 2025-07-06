@@ -1,3 +1,7 @@
+
+import { CognitoUserPool } from 'amazon-cognito-identity-js';
+
+
 // 🔐 Cognito setup
 const poolData = {
   UserPoolId: 'us-east-1_AmVAfOyNM',
