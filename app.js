@@ -1,11 +1,14 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // your entire script goes here
-
 import {
   CognitoUserPool,
   AuthenticationDetails,
   CognitoUser
 } from "https://esm.sh/amazon-cognito-identity-js";
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // your entire script goes here
+
+
 
 // 🔐 Cognito setup
 const poolData = {
