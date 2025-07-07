@@ -86,9 +86,43 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("Fetched expenses:", data);
       // ✨ Optional: Render data to the DOM here
 
+  document.getElementById('summary').textContent =
+    `Total: ${data.totalAmount} | Count: ${data.count}`;
+
+  const ul = document.getElementById('results');
+  ul.innerHTML = "";
+  data.data.forEach(item => {
+  const li = document.createElement('li');
+
+  // Format timestamp
+  const formattedDate = new Date(item.timestamp).toLocaleString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+
+  li.textContent = `${formattedDate} – ${item.category} – $${item.amount}`;
+  li.className = "border p-2 rounded bg-gray-50"; // optional styling
+  ul.appendChild(li);
+});
+
+
     } catch (err) {
       console.error("Fetching failed:", err.message || err);
       alert("Error fetching expenses: " + err.message);
     }
   }
+
+
+
+
+
+  
+
+
+
+
+  
 });
