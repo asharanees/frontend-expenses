@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Expense Tracker</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  
 </head>
 
 <body class="bg-gray-100 p-6 font-sans">
@@ -38,10 +39,9 @@
         <option value="Transport">Transport</option>
         <option value="Shopping">Shopping</option>
       </select>
-      <button onclick="fetchExpenses()" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
-        Get Expenses
-      </button>
-    </div>
+      <button id="fetchBtn">Get Expenses</button>
+
+      </div>
 
     <div id="loader" class="mt-4 text-blue-600 font-medium hidden">Loading...</div>
     

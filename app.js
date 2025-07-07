@@ -59,7 +59,7 @@ cognitoUser.authenticateUser(authDetails, {
 });
 
 });
-
+document.getElementById("fetchBtn").addEventListener("click", fetchExpenses);
 // 📦 Expense fetching function
 async function fetchExpenses() {
   const userId = document.getElementById('userId').value;
@@ -80,7 +80,8 @@ async function fetchExpenses() {
     }
   });
 
-window.fetchExpenses = fetchExpenses;
+
+
 
   const data = await res.json();
   console.log("Fetched expenses:", data);
