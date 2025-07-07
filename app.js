@@ -80,6 +80,8 @@ async function fetchExpenses() {
     }
   });
 
+window.fetchExpenses = fetchExpenses;
+
   const data = await res.json();
   console.log("Fetched expenses:", data);
   // 📊 Add code here to display results to the user
