@@ -85,18 +85,5 @@ async function fetchExpenses() {
   console.log("Fetched expenses:", data);
   // 📊 Add code here to display results to the user
 
-  const list = document.getElementById("results");
-list.innerHTML = ""; // Clear previous results
-
-if (!Array.isArray(data)) {
-  list.innerHTML = "<li>No data received</li>";
-  return;
-}
-
-data.forEach(exp => {
-  const item = document.createElement("li");
-  item.textContent = `${exp.date} • ${exp.category} • $${exp.amount}`;
-  list.appendChild(item);
-});
 
 }
