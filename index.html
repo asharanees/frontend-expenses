@@ -7,6 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
 </head>
+<div id="loginSection">
 
 <body class="bg-gray-100 p-6 font-sans">
   
@@ -16,7 +17,8 @@
    <input id="passwordInput" type="password" placeholder="Password" class="w-full p-2 mb-2 border rounded" />
    <button id="loginBtn" class="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700">Login</button>
   </div>
-
+</div>
+<div id="expenseSection" style="display: none">
 
   <div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
     <h1 class="text-2xl font-bold mb-4 text-blue-700">Expense Filter</h1>
@@ -50,8 +52,8 @@
 
     <ul id="results" class="mt-4 space-y-2"></ul>
   </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/amazon-cognito-identity-js/6.2.0/amazon-cognito-identity.min.js"></script>
+</div>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/amazon-cognito-identity-js/6.2.0/amazon-cognito-identity.min.js"></script>
 <script type="module" src="app.js"></script>
 
 

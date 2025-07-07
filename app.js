@@ -35,6 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Login successful! JWT:", idToken);
         window.userToken = idToken;
         // fetchExpenses(); // Optional: Fetch after login
+         document.getElementById("loginSection").style.display = "none";
+        document.getElementById("expenseSection").style.display = "block";
+
       },
       onFailure: (err) => {
         console.error("Login failed:", err.message || JSON.stringify(err));
