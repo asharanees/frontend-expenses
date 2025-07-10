@@ -60,7 +60,18 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+// signup button logic
+document.getElementById("signupBtn").addEventListener("click", () => {
+  const email = document.getElementById("signupEmail").value;
+  const password = document.getElementById("signupPassword").value;
 
+  if (!email || !password) {
+    alert("Please enter both email and password.");
+    return;
+  }
+
+  
+});
 userPool.signUp(email, password, [], null, (err, result) => {
   if (err) {
     console.error("Signup error:", err.message || err);
