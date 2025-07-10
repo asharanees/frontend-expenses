@@ -120,6 +120,20 @@ document.getElementById("resendBtn").addEventListener("click", () => {
     } else {
       console.log("Resend success:", result);
       alert("Verification email resent! Please check your inbox.");
+
+      // ✅ Prompt and confirm inside the callback
+      const confirmationCode = prompt("Enter the verification code from your email:");
+
+      cognitoUser.confirmRegistration(confirmationCode, true, (err, success) => {
+        if (err) {
+          console.error("Confirmation error:", err.message);
+          alert("Verification failed: " + err.message);
+        } else {
+          alert("Account confirmed! You may now log in.");
+          document.getElementById("signupSection").style.display = "none";
+          document.getElementById("loginSection").style.display = "block";
+        }
+      });
     }
   });
 });
