@@ -61,6 +61,31 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+userPool.signUp(email, password, [], null, (err, result) => {
+  if (err) {
+    console.error("Signup error:", err.message || err);
+    alert("Signup failed: " + err.message);
+  } else {
+    console.log("Signup success:", result);
+    alert("Signup successful! Please check your email for the verification code.");
+
+    const confirmationCode = prompt("Enter the verification code from your email:");
+    const cognitoUser = result.user;
+
+    cognitoUser.confirmRegistration(confirmationCode, true, (err, success) => {
+      if (err) {
+        console.error("Confirmation error:", err.message);
+        alert("Verification failed: " + err.message);
+      } else {
+        alert("Account confirmed! You may now log in.");
+        // Optional: Switch to login section
+        document.getElementById("signupSection").style.display = "none";
+        document.getElementById("loginSection").style.display = "block";
+      }
+    });
+  }
+});
+
   // 📦 Fetch expenses button logic
   document.getElementById("fetchBtn").addEventListener("click", fetchExpenses);
 
