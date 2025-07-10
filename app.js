@@ -98,6 +98,34 @@ userPool.signUp(email, password, [], null, (err, result) => {
 
 });
 
+document.getElementById("resendBtn").addEventListener("click", () => {
+  const email = document.getElementById("signupEmail").value;
+
+  if (!email) {
+    alert("Please enter your email before requesting a resend.");
+    return;
+  }
+
+  const userData = {
+    Username: email,
+    Pool: userPool
+  };
+
+  const cognitoUser = new CognitoUser(userData);
+
+  cognitoUser.resendConfirmationCode((err, result) => {
+    if (err) {
+      console.error("Resend error:", err.message || err);
+      alert("Resend failed: " + err.message);
+    } else {
+      console.log("Resend success:", result);
+      alert("Verification email resent! Please check your inbox.");
+    }
+  });
+});
+
+
+
   // 📦 Fetch expenses button logic
   document.getElementById("fetchBtn").addEventListener("click", fetchExpenses);
 
