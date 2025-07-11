@@ -52,7 +52,7 @@ document.getElementById("goToSignup").addEventListener("click", () => {
         // fetchExpenses(); // Optional: Fetch after login
          document.getElementById("loginSection").style.display = "none";
         document.getElementById("expenseSection").style.display = "block";
-        document.getElementById("addExpenseSection").style.display = "block";
+        
       },
       onFailure: (err) => {
         console.error("Login failed:", err.message || JSON.stringify(err));
