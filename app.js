@@ -15,12 +15,14 @@ document.addEventListener("DOMContentLoaded", function () {
 //  landing page button logic
 document.getElementById("goToLogin").addEventListener("click", () => {
   document.getElementById("landingSection").style.display = "none";
+  document.getElementById("signupSection").style.display = "none";
   document.getElementById("loginSection").style.display = "block";
 });
 
 document.getElementById("goToSignup").addEventListener("click", () => {
   document.getElementById("landingSection").style.display = "none";
   document.getElementById("signupSection").style.display = "block";
+  document.getElementById("loginSection").style.display = "none";
 });
 
 
