@@ -203,7 +203,9 @@ const amounts = Object.values(categoryTotals);
 const ctx = document.getElementById("expenseChart").getContext("2d");
 
 // 💥 Destroy previous chart if exists
-if (window.expenseChart) window.expenseChart.destroy();
+if (window.expenseChart && typeof window.expenseChart.destroy === "function") {
+  window.expenseChart.destroy();
+}
 
 window.expenseChart = new Chart(ctx, {
   type: 'pie',
