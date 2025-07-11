@@ -39,39 +39,53 @@
   <button id="resendBtn" class="w-full mt-2 bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600">Resend Verification Email</button>
 </div>
 
+
+<!-- 💸 Expense Section -->
 <div id="expenseSection" style="display: none">
+  <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-lg animate-fade-in">
+    <h1 class="text-3xl font-bold mb-6 text-blue-700 text-center">Track Your Expenses</h1>
 
-  <div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
-    <h1 class="text-2xl font-bold mb-4 text-blue-700">Expense Filter</h1>
-    
+    <!-- 🎛️ Filters -->
     <div class="space-y-4">
-      <input type="text" id="userId" placeholder="User ID" class="w-full p-2 border rounded" />
-      <div class="flex gap-2">
-        <label for="start" class="text-sm text-gray-600 mb-1">Start Date</label>
-        
-        <input type="date" id="start" class="flex-1 p-2 border rounded" />
-        
-        <label for="end" class="text-sm text-gray-600 mb-1">End Date</label>
-        <input type="date" id="end" class="flex-1 p-2 border rounded" />
-  
+      <input type="text" id="userId" placeholder="Name" class="w-full p-3 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-300" />
 
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="start" class="block text-sm text-gray-600 mb-1">Start Date</label>
+          <input type="date" id="start" class="w-full p-3 border rounded-lg shadow-sm" />
+        </div>
+        <div>
+          <label for="end" class="block text-sm text-gray-600 mb-1">End Date</label>
+          <input type="date" id="end" class="w-full p-3 border rounded-lg shadow-sm" />
+        </div>
       </div>
-      <select id="category" class="w-full p-2 border rounded">
-        <option value="">All Categories</option>
-        <option value="food">Food</option>
-        <option value="Transport">Transport</option>
-        <option value="Shopping">Shopping</option>
-      </select>
-      <button id="fetchBtn" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
-        Get Expenses
+
+      <div>
+        <label for="category" class="block text-sm text-gray-600 mb-1">Category</label>
+        <select id="category" class="w-full p-3 border rounded-lg shadow-sm bg-gray-50">
+          <option value="">All Categories</option>
+          <option value="Food">🍔 Food</option>
+          <option value="Transport">🚗 Transport</option>
+          <option value="Shopping">🛍️ Shopping</option>
+        </select>
+      </div>
+
+      <button id="fetchBtn" class="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:opacity-90 transition">
+        🔍 Get Expenses
       </button>
     </div>
 
-    <div id="loader" class="mt-4 text-blue-600 font-medium hidden">Loading...</div>
-    
-    <div id="summary" class="mt-4 text-gray-700 font-semibold"></div>
+    <!-- ⏳ Loader -->
+    <div id="loader" class="mt-6 text-blue-600 font-semibold hidden animate-pulse">Loading expenses...</div>
 
-    <ul id="results" class="mt-4 space-y-2"></ul>
+    <!-- 📊 Summary -->
+    <div id="summary" class="mt-6 text-gray-800 font-medium text-center"></div>
+
+    <!-- 🧾 Expenses List -->
+    <ul id="results" class="mt-4 space-y-3"></ul>
+
+    <!-- 🥧 Chart Canvas -->
+    <canvas id="expenseChart" width="400" height="400" class="mt-10 mx-auto"></canvas>
   </div>
 </div>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/amazon-cognito-identity-js/6.2.0/amazon-cognito-identity.min.js"></script>
