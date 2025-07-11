@@ -12,6 +12,19 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   const userPool = new CognitoUserPool(poolData);
 
+//  landing page button logic
+document.getElementById("goToLogin").addEventListener("click", () => {
+  document.getElementById("landingSection").style.display = "none";
+  document.getElementById("loginSection").style.display = "block";
+});
+
+document.getElementById("goToSignup").addEventListener("click", () => {
+  document.getElementById("landingSection").style.display = "none";
+  document.getElementById("signupSection").style.display = "block";
+});
+
+
+
   // 🧠 Login button logic
   document.getElementById("loginBtn").addEventListener("click", () => {
     const username = document.getElementById("emailInput").value;
@@ -60,6 +73,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  
+
 // signup button logic
 
 
