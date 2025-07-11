@@ -37,6 +37,34 @@
   <input id="signupPassword" type="password" placeholder="Password" class="w-full p-2 mb-2 border rounded" />
   <button id="signupBtn" class="w-full bg-purple-600 text-white p-2 rounded hover:bg-purple-700">Sign Up</button>
   <button id="resendBtn" class="w-full mt-2 bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600">Resend Verification Email</button>
+
+
+
+<!-- 💸 Add Expense Section -->
+<div id="addExpenseSection" style="display: none">
+  <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-lg animate-fade-in">
+    <h1 class="text-3xl font-bold mb-6 text-blue-700 text-center">Add Your Expenses</h1>
+    <div class="space-y-4">
+      <input type="text" id="username" placeholder="Name" class="w-full p-3 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-300" />
+      <input type="number" id="expenseAmount" placeholder="Amount" class="w-full p-3 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-300" />
+      
+      <select id="categoryname" class="w-full p-3 border rounded-lg shadow-sm bg-gray-50">
+        <option value="">Select Category</option>
+        <option value="Food">🍔 Food</option>
+        <option value="Transport">🚗 Transport</option>
+        <option value="Shopping">🛍️ Shopping</option>
+        <option value="Kids">🛍️ Kids</option>
+        <option value="Loan">🛍️ Loan</option>
+        <option value="Credit Card">🛍️ Credit Card</option>
+        <option value="Entertainment">🛍️ Entertainment</option>
+        <option value="Bills">🛍️ Bills</option>
+        <option value="Grocery">🛍️ Grocery</option>
+        <option value="Miscellaneous">🛍️ Miscellaneous</option>
+      </select>
+
+      <button id="addExpenseBtn" class="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:opacity-90 transition">
+        ➕ Add Expense
+      </button>
 </div>
 
 
