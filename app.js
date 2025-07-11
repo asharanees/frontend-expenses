@@ -186,8 +186,52 @@ document.getElementById("resendBtn").addEventListener("click", () => {
       console.log("Fetched expenses:", data);
       // ✨ Optional: Render data to the DOM here
 
+      
   document.getElementById('summary').textContent =
     `Total: ${data.totalAmount} | Count: ${data.count}`;
+
+  const categoryTotals = {}; // e.g., { Food: 120, Transport: 65 }
+
+data.data.forEach(exp => {
+  const cat = exp.category || "Uncategorized";
+  categoryTotals[cat] = (categoryTotals[cat] || 0) + exp.amount;
+});
+
+const labels = Object.keys(categoryTotals);
+const amounts = Object.values(categoryTotals);
+
+const ctx = document.getElementById("expenseChart").getContext("2d");
+
+// 💥 Destroy previous chart if exists
+if (window.expenseChart) window.expenseChart.destroy();
+
+window.expenseChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: labels,
+    datasets: [{
+      label: "Expenses by Category",
+      data: amounts,
+      backgroundColor: [
+        "#f87171", "#34d399", "#60a5fa", "#fbbf24", "#a78bfa", "#f472b6", "#cbd5e1"
+      ],
+      borderColor: "#ffffff",
+      borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom"
+      },
+      title: {
+        display: true,
+        text: "Category Breakdown"
+      }
+    }
+  }
+});
 
   const ul = document.getElementById('results');
   ul.innerHTML = "";
