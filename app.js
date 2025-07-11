@@ -156,6 +156,48 @@ document.getElementById("resendBtn").addEventListener("click", () => {
   });
 });
 
+  // 📦 Add expenses button logic
+
+  document.getElementById("addExpenseBtn").addEventListener("click", addExpenses);
+ // add expenses function
+  async function addExpenses() {
+    const userId = document.getElementById("expenseName").value;
+    const category = document.getElementById("categoryname").value;
+    const amount = parseFloat(document.getElementById("expenseAmount").value);
+        
+
+  if (!category || isNaN(amount) || !userId) {
+    alert("Please fill in all fields with valid data.");
+    return;
+  }
+
+  const expense = {
+    userId,
+    amount,
+    category
+   };
+  
+  try {
+    const res = await fetch("https://ylgl5p7917.execute-api.us-east-1.amazonaws.com/hello", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${window.userToken}`
+      },
+      body: JSON.stringify(expense)
+    });
+
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+    alert("Expense added successfully!");
+
+    // Optionally refresh expense list
+    // fetchExpenses(); 
+  } catch (err) {
+    console.error("Add expense failed:", err.message);
+    alert("Failed to add expense: " + err.message);
+  }
+};
+
 
 
   // 📦 Fetch expenses button logic
