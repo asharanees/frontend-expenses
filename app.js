@@ -159,6 +159,8 @@ document.getElementById("resendBtn").addEventListener("click", () => {
 
 
   // 📦 Fetch expenses button logic
+
+ 
   document.getElementById("fetchBtn").addEventListener("click", fetchExpenses);
 
   // 📊 Expense fetching function
@@ -197,6 +199,17 @@ data.data.forEach(exp => {
   categoryTotals[cat] = (categoryTotals[cat] || 0) + exp.amount;
 });
 
+const totalsContainer = document.getElementById("categoryTotals");
+totalsContainer.innerHTML = "";
+
+Object.entries(categoryTotals).forEach(([cat, amt]) => {
+  const div = document.createElement("div");
+  div.className = "flex justify-between p-2 bg-gray-100 rounded shadow text-sm";
+  div.innerHTML = `<span>${cat}</span><span>$${amt.toFixed(2)}</span>`;
+  totalsContainer.appendChild(div);
+});
+
+
 const labels = Object.keys(categoryTotals);
 const amounts = Object.values(categoryTotals);
 
@@ -208,33 +221,30 @@ if (window.expenseChart && typeof window.expenseChart.destroy === "function") {
 }
 
 window.expenseChart = new Chart(ctx, {
-  type: 'pie',
+  type: "pie",
   data: {
-    labels: labels,
+    labels: Object.keys(categoryTotals),
     datasets: [{
-      label: "Expenses by Category",
-      data: amounts,
+      data: Object.values(categoryTotals),
       backgroundColor: [
-        "#f87171", "#34d399", "#60a5fa", "#fbbf24", "#a78bfa", "#f472b6", "#cbd5e1"
+        "#f87171", "#34d399", "#60a5fa", "#fbbf24", "#a78bfa", "#f472b6"
       ],
-      borderColor: "#ffffff",
+      borderColor: "#fff",
       borderWidth: 2
     }]
   },
   options: {
     responsive: true,
     plugins: {
-      legend: {
-        position: "bottom"
-      },
-      title: {
-        display: true,
-        text: "Category Breakdown"
-      }
+      legend: { position: "bottom" },
+      title: { display: true, text: "Category Breakdown" }
     }
   }
 });
 
+
+  // 🧾 Render expenses list
+  
   const ul = document.getElementById('results');
   ul.innerHTML = "";
   data.data.forEach(item => {
