@@ -161,8 +161,8 @@ document.getElementById("resendBtn").addEventListener("click", () => {
   document.getElementById("addExpenseBtn").addEventListener("click", addExpenses);
  // add expenses function
   async function addExpenses() {
-    const userId = document.getElementById("expenseName").value;
-    const category = document.getElementById("categoryname").value;
+    const userId = document.getElementById("username").value;
+    const category = document.getElementById("addcategory").value;
     const amount = parseFloat(document.getElementById("expenseAmount").value);
         
 
