@@ -178,11 +178,11 @@ document.getElementById("resendBtn").addEventListener("click", () => {
    };
   
   try {
-    const res = await fetch("https://ylgl5p7917.execute-api.us-east-1.amazonaws.com/hello", {
+    const res = await fetch("https://ylgl5p7917.execute-api.us-east-1.amazonaws.com/prod/hello", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${window.userToken}`
+        Authorization: window.userToken
       },
       body: JSON.stringify(expense)
     });
