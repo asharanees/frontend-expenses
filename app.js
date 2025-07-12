@@ -70,6 +70,7 @@ document.getElementById("goToSignup").addEventListener("click", () => {
           onFailure: (err) => {
             console.error("Password update failed:", err.message || JSON.stringify(err));
             alert("Password update error: " + err.message);
+          }
         });
       }
     });
@@ -286,7 +287,7 @@ window.expenseChart = new Chart(ctx, {
 
   // 🧾 Render expenses list
   // add Transactions button click event
-    
+
     const ul = document.getElementById('results');
     ul.innerHTML = "";
     data.data.forEach(item => {
@@ -307,8 +308,8 @@ window.expenseChart = new Chart(ctx, {
     
   });
 
-  } catch (err) {
+}catch (err) {
     console.error("Fetching failed:", err.message || err);
     alert("Error fetching expenses: " + err.message);
   }
-};
+  };
