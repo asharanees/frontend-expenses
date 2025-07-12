@@ -70,7 +70,6 @@ document.getElementById("goToSignup").addEventListener("click", () => {
           onFailure: (err) => {
             console.error("Password update failed:", err.message || JSON.stringify(err));
             alert("Password update error: " + err.message);
-          }
         });
       }
     });
@@ -286,41 +285,30 @@ window.expenseChart = new Chart(ctx, {
 
 
   // 🧾 Render expenses list
-  
-  const ul = document.getElementById('results');
-  ul.innerHTML = "";
-  data.data.forEach(item => {
-  const li = document.createElement('li');
+  // add Transactions button click event
+    
+    const ul = document.getElementById('results');
+    ul.innerHTML = "";
+    data.data.forEach(item => {
+      const li = document.createElement('li');
 
-  // Format timestamp
-  const formattedDate = new Date(item.timestamp).toLocaleString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
+      // Format timestamp
+      const formattedDate = new Date(item.timestamp).toLocaleString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+
+      li.textContent = `${formattedDate} – ${item.category} – $${item.amount}`;
+      li.className = "border p-2 rounded bg-gray-50"; // optional styling
+      ul.appendChild(li);
+    
   });
 
-  li.textContent = `${formattedDate} – ${item.category} – $${item.amount}`;
-  li.className = "border p-2 rounded bg-gray-50"; // optional styling
-  ul.appendChild(li);
-});
-
-
-    } catch (err) {
-      console.error("Fetching failed:", err.message || err);
-      alert("Error fetching expenses: " + err.message);
-    }
+  } catch (err) {
+    console.error("Fetching failed:", err.message || err);
+    alert("Error fetching expenses: " + err.message);
   }
-
-
-
-
-
-  
-
-
-
-
-  
-});
+};
