@@ -286,30 +286,41 @@ window.expenseChart = new Chart(ctx, {
 
 
   // 🧾 Render expenses list
-  // add Transactions button click event
+  
+  const ul = document.getElementById('results');
+  ul.innerHTML = "";
+  data.data.forEach(item => {
+  const li = document.createElement('li');
 
-    const ul = document.getElementById('results');
-    ul.innerHTML = "";
-    data.data.forEach(item => {
-      const li = document.createElement('li');
-
-      // Format timestamp
-      const formattedDate = new Date(item.timestamp).toLocaleString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-      });
-
-      li.textContent = `${formattedDate} – ${item.category} – $${item.amount}`;
-      li.className = "border p-2 rounded bg-gray-50"; // optional styling
-      ul.appendChild(li);
-    
+  // Format timestamp
+  const formattedDate = new Date(item.timestamp).toLocaleString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
   });
 
-}catch (err) {
-    console.error("Fetching failed:", err.message || err);
-    alert("Error fetching expenses: " + err.message);
+  li.textContent = `${formattedDate} – ${item.category} – $${item.amount}`;
+  li.className = "border p-2 rounded bg-gray-50"; // optional styling
+  ul.appendChild(li);
+});
+
+
+    } catch (err) {
+      console.error("Fetching failed:", err.message || err);
+      alert("Error fetching expenses: " + err.message);
+    }
   }
-  };
+
+
+
+
+
+  
+
+
+
+
+  
+});
