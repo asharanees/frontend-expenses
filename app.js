@@ -190,13 +190,14 @@ document.getElementById("resendBtn").addEventListener("click", () => {
     if (!res.ok) throw new Error(`Server error: ${res.status}`);
     alert("Expense added successfully!");
 
-    // Optionally refresh expense list
+    // Optionally refresh expense list  
     // fetchExpenses(); 
   } catch (err) {
     console.error("Add expense failed:", err.message);
     alert("Failed to add expense: " + err.message);
   }
 };
+
 
 
 
